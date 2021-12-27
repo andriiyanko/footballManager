@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div>
+    <a class="btn btn-outline-secondary" th:href="@{'/transfer/tasks'}" role="button">&laquo; Previous</a>
+</div>
+
+<h1>Transfer table : </h1>
+<table class="table">
+    <thead>
+    <tr>
+        <!--        <th scope="col">#</th>-->
+        <th scope="col">#</th>
+        <th scope="col">Player First Name</th>
+        <th scope="col">Player Last Name</th>
+        <th scope="col">Team To</th>
+        <th scope="col">Transfer Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transfer, status : ${transfers}">
+        <th scope="row" th:text="${status.index + 1}"></th>
+        <td><a  th:text="${transfer.player.firstName}" th:href="@{'/player/findPlayersByTeam/' + ${transfer.player.team.name}}"></a></td>
+        <td th:text="${transfer.player.lastName}"></td>
+        <td><a th:text="${transfer.teamTo.name}" th:href="@{'/player/findPlayersByTeam/' + ${transfer.teamTo.name}}"></a></td>
+        <td th:text="${transfer.transferDate}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

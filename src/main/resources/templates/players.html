@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div>
+    <a class="btn btn-outline-secondary" th:href="@{'/player/tasks'}" role="button">&laquo; Previous</a>
+</div>
+
+<h1>Player table : </h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Birth Date</th>
+        <th scope="col">Age</th>
+        <th scope="col">Start Career</th>
+        <th scope="col">Experience</th>
+        <th scope="col">Team</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="player, status : ${players}">
+        <th scope="row" th:text="${status.index + 1}"></th>
+        <td th:text="${player.firstName}"></td>
+        <td th:text="${player.lastName}"></td>
+        <td th:text="${player.birthDate}"></td>
+        <td th:text="${player.age}"></td>
+        <td th:text="${player.startCareer}"></td>
+        <td th:text="${player.experience}"></td>
+<!--        <td th:text="${player.team.name}"></td>-->
+        <td><a  th:text="${player.team.name}" th:href="@{'/player/findPlayersByTeam/' + ${player.team.name}}"></a></td>
+        <td><a th:href="@{'/player/remove/' + ${player.id}}">Remove</a></td>
+    </tr>
+    </tbody>
+
+</table>
+</body>
+</html>

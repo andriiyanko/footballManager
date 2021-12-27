@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+    <!--    JQUERY-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+<div>
+    <a class="btn btn-outline-secondary" th:href="@{'/team/mainPage'}" role="button">&laquo; Previous</a>
+</div>
+<div class="tasks">
+
+    <a class="btn btn-primary" th:href="@{'/player/list'}" role="button">Show players</a>
+    <!--Find player by First Name-->
+    <a class="btn btn-primary" padding="40px" data-toggle="collapse" href="#collapsePlayerForm1" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Find player by first name
+    </a>
+    <div class="collapse" id="collapsePlayerForm1">
+        <br/>
+        <form method="post" th:action="@{/player/findByFirstName}">
+            <p><label for="name">Player name </label></p>
+            <p><input type="text" name="name" id="name"></p>
+            <br/>
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <!--Find player by Fist and Last Name-->
+    <a class="btn btn-primary" padding="40px" data-toggle="collapse" href="#collapsePlayerForm2" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Find player by first and last name
+    </a>
+    <div class="collapse" id="collapsePlayerForm2">
+        <br/>
+        <form method="post" th:action="@{/player/findByFirstAndLastName}">
+            <p><label for="firstName">Player first name </label></p>
+            <p><input type="text" name="firstName" id="firstName"></p>
+            <br/>
+            <p><label for="lastName">Team country </label></p>
+            <p><input type="text" name="lastName" id="lastName"></p>
+            <br/>
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <!--Find players of the team-->
+    <a class="btn btn-primary" padding="40px" data-toggle="collapse" href="#collapsePlayerForm3" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Find players of the team
+    </a>
+    <div class="collapse" id="collapsePlayerForm3">
+        <br/>
+        <form method="post" th:action="@{/player/findPlayersByTeamName}">
+            <p><label for="teamName">Team name </label></p>
+            <p><input type="text" name="teamName" id="teamName"></p>
+            <br/>
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <!--Add player to the team-->
+    <a class="btn btn-primary" padding="40px" data-toggle="collapse" href="#collapsePlayerForm4" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Add player to the team
+    </a>
+    <div class="collapse" id="collapsePlayerForm4">
+        <br/>
+        <form method="post" th:action="@{/player/add}">
+            <p><label for="first_name">First name </label></p>
+            <p><input type="text" name="first_name" id="first_name"></p>
+            <br/>
+            <p><label for="last_name">Last name </label></p>
+            <p><input type="text" name="last_name" id="last_name"></p>
+            <br/>
+            <p><label for="birth_date">Birth date </label></p>
+            <p><input type="date" name="birth_date" id="birth_date"></p>
+            <br/>
+            <p><label for="start_career">Start career </label></p>
+            <p><input type="date" name="start_career" id="start_career"></p>
+            <br/>
+            <p><label for="team_name">Team name </label></p>
+            <p><input type="text" name="team_name" id="team_name"></p>
+            <br/>
+            <input type="submit" value="Add player to the team">
+        </form>
+    </div>
+</div>
+</body>
+</html>
