@@ -49,12 +49,7 @@ public class TransferServiceImpl implements TransferService {
     public List<Transfer> findAllTransfers() {
         return Lists.newArrayList(transferRepository.findAll());
     }
-
-    @Override
-    public Transfer doTransfer(Transfer transfer) {
-        return transferRepository.save(transfer);
-    }
-
+    
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
     public Transfer makeTransfer(String firstName, String lastName, String transferToTeam, double commission, LocalDate transferDate) {

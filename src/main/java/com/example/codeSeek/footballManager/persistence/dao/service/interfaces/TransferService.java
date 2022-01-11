@@ -10,7 +10,6 @@ import java.util.Optional;
 public interface TransferService {
     Optional<Transfer> findTransferById(Integer id);
     List<Transfer> findAllTransfers();
-    Transfer doTransfer(Transfer transfer);
     Transfer addTransfer (Transfer transfer);
     Transfer makeTransfer (String firstName, String lastName, String transferToTeam, double commission, LocalDate transferDate);
 }
