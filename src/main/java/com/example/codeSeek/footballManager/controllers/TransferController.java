@@ -22,18 +22,6 @@ import java.util.Optional;
 @RequestMapping("/transfer")
 public class TransferController {
     private TransferService transferService;
-    private PlayerService playerService;
-    private TeamService teamService;
-
-    @Autowired
-    public void setTeamService(TeamService teamService) {
-        this.teamService = teamService;
-    }
-
-    @Autowired
-    public void setPlayerService(PlayerService playerService) {
-        this.playerService = playerService;
-    }
 
     @Autowired
     public void setTransferService(TransferService transferService) {
@@ -52,7 +40,6 @@ public class TransferController {
 
     @PostMapping("/doTransfer")
     public ModelAndView doTransfer(HttpServletRequest request, ModelAndView modelAndView){
-        Transfer transfer = new Transfer();
         String firstName = request.getParameter("first_name");
         String lastName = request.getParameter("last_name");
         String transferToTeam = request.getParameter("team_To");
@@ -62,30 +49,8 @@ public class TransferController {
         String transferDateParameter = request.getParameter("transfer_date");
         LocalDate transferDate = LocalDate.parse(transferDateParameter);
 
-        Team toTeam = teamService.findTeamByName(transferToTeam).stream().findFirst().orElseThrow(NoSuchElementException::new);
-
-        Player player = playerService.findPLayerByFirstNameAndLastName(firstName, lastName).stream().findFirst().orElseThrow(NoSuchElementException::new);
-        Team oldTeam = player.getTeam();
-
-        int transferCost = player.getExperience() * 100000 / player.getAge();
-        int commission = (int) (commissionParameter * transferCost);
-        int transferSum = transferCost + commission;
-
-        toTeam.setBalance(toTeam.getBalance() - transferSum);
-        oldTeam.setBalance(oldTeam.getBalance() + transferSum);
-
-        player.setTeam(toTeam);
-        toTeam.addPlayer(player);
-        oldTeam.removePlayer(player);
-
-        transfer.setPlayer(player);
-        transfer.setTransferDate(transferDate);
-        transfer.setTeamTo(toTeam);
-
-        toTeam.addTransfer(transfer);
-        oldTeam.addTransfer(transfer);
-
-        transferService.doTransfer(transfer);
+        Transfer transfer = transferService.makeTransfer(firstName, lastName, transferToTeam, commissionParameter, transferDate);
+        transferService.addTransfer(transfer);
 
         modelAndView.setViewName("redirect:/transfer/list");
 
